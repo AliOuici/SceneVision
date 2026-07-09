@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SceneVision — Scene Classifier</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 SceneVision</h1>
+        <p class="subtitle">Upload an image and let AI classify the scene</p>
+
+        <div class="upload-box" id="uploadBox">
+            <input type="file" id="fileInput" accept="image/*" hidden>
+            <p>📁 Click or drag an image here</p>
+            <button onclick="document.getElementById('fileInput').click()">
+                Choose Image
+            </button>
+        </div>
+
+        <img id="preview" src="" alt="" style="display:none;">
+
+        <button id="predictBtn" onclick="predict()" style="display:none;">
+            🔍 Classify Scene
+        </button>
+
+        <div id="result" style="display:none;">
+            <h2>Result: <span id="className"></span></h2>
+            <h3>Confidence: <span id="confidence"></span></h3>
+            <div id="allProbs"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('preview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                document.getElementById('predictBtn').style.display = 'block';
+                document.getElementById('result').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        async function predict() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            document.getElementById('className').textContent = data.class;
+            document.getElementById('confidence').textContent = data.confidence;
+
+            let probsHtml = '<h4>All Classes:</h4>';
+            for (const [cls, prob] of Object.entries(data.all_probs)) {
+                probsHtml += `
+                <div class="prob-bar">
+                    <span>${cls}</span>
+                    <div class="bar">
+                        <div class="fill" style="width:${prob}"></div>
+                    </div>
+                    <span>${prob}</span>
+                </div>`;
+            }
+            document.getElementById('allProbs').innerHTML = probsHtml;
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

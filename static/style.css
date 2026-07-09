@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #065A82, #0A3D55);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #065A82;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #64748B;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.upload-box {
+    border: 3px dashed #1C7293;
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 20px;
+    background: #F0F9FB;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-box:hover {
+    background: #E0F4FB;
+    border-color: #065A82;
+}
+
+.upload-box p {
+    color: #64748B;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+button {
+    background: #065A82;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #1C7293;
+}
+
+#preview {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 15px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+#predictBtn {
+    background: #02C39A;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    padding: 14px 40px;
+}
+
+#predictBtn:hover {
+    background: #01A882;
+}
+
+#result {
+    background: #F0F9FB;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+#result h2 {
+    color: #065A82;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+#result h2 span {
+    color: #02C39A;
+    text-transform: capitalize;
+}
+
+#result h3 {
+    color: #64748B;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+#result h4 {
+    color: #065A82;
+    margin-bottom: 10px;
+}
+
+.prob-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.prob-bar span:first-child {
+    width: 80px;
+    text-align: right;
+    color: #64748B;
+    text-transform: capitalize;
+}
+
+.bar {
+    flex: 1;
+    background: #E2E8F0;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: linear-gradient(90deg, #065A82, #02C39A);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.prob-bar span:last-child {
+    width: 50px;
+    color: #065A82;
+    font-weight: bold;
+}
