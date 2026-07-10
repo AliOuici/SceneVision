@@ -39,4 +39,4 @@ demo = gr.Interface(
     theme=gr.themes.Ocean()
 )
 
-demo.launch(share=True)
+demo.launch(server_name="0.0.0.0", server_port=7860)
