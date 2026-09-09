@@ -1,3 +1,4 @@
+import os
 import gradio as gr
 import torch
 import torch.nn as nn
@@ -39,4 +40,4 @@ demo = gr.Interface(
     theme=gr.themes.Ocean()
 )
 
-demo.launch(server_name="0.0.0.0", server_port=7860)
+demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 7860)))
